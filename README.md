@@ -36,9 +36,10 @@ nodebrew install v20.17.0
 
 
 ## バックエンド
-1. dockerの起動
+dockerの起動
 ```
-docker compose up
+docker compose build
+docker compose up --build
 ```
 これで無理だったらまた連絡ください。
 
