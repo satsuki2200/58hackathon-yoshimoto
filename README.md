@@ -36,10 +36,26 @@ nodebrew install v20.17.0
 
 
 ## バックエンド
-dockerの起動
+dockerコンテナの起動をするために以下のコマンドを実行
 ```
 docker compose build
 docker compose up --build
 ```
+
+上記のコマンドを実行した後に、DockerDesktopを見ると、`58hackathon-yoshimoto`というものと、その下に`web`と`db`があればコンテナの起動に成功しています。
+ちなみに[http://localhost:8000](http://localhost:8000/)にアクセスすると、djangoのインストール完了画面が出てきます。
+(もしこれが出てこないのであれば、どこかで失敗しているので、また連絡してください。)
+
+その後、以下のコマンドを実行し、`djangorestframework 3.15.2`という記述があれば、これで環境構築終了。
+```
+docker compose exec web pip list
+```
+
+もし記述がなければ、以下のコマンドを実行。`djangorestframework 3.15.2`が出てきたら環境構築終了。
+```
+docker compose exec web pip install djangorestframework
+docker compose exec web pip list
+```
+
 これで無理だったらまた連絡ください。
 
