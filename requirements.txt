@@ -1,2 +1,6 @@
 Django==5.1.1
 psycopg2
+djangorestframework==3.15.2
+python_dotenv
+Markdown
+django-filter
