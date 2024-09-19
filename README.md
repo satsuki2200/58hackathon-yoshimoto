@@ -1,5 +1,13 @@
 # 58hackathon-yoshimoto
 
+## バージョン
+
+| OS | MacOS |
+----|---- 
+| Node.js | v20.17.0 |
+| Python | 3.10.14 |
+| Django | 5.1.1 |
+
 # 環境構築
 > [!WARNING]
 > 開発メンバーがMacOSを使用しているため、MacOSで環境構築を行うことを前提としています。
