@@ -7,9 +7,11 @@ WORKDIR /frontend
 # 依存パッケージをインストール
 COPY package.json package-lock.json ./
 RUN npm install
+RUN npm install vite@latest
+RUN npm install
 
 # アプリケーションのソースをコピー
 COPY . .
 
 # Reactアプリを起動
-CMD ["npm", "start"]
+# CMD ["npm", "start"]

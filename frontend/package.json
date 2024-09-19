@@ -5,13 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "WATCHPACK_POLLING=true react-scripts start",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1",
+    "vite": "^5.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
