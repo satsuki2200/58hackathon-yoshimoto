@@ -128,11 +128,11 @@ const Things = () => {
       <div className="add-todo">
       <h2>新規タスクの追加</h2>
         <input value={todoText} onChange={onChangeTodoText} />
-        <button onClick={onClickAdd}>追加</button>
+        <button className="addButton" onClick={onClickAdd}>追加</button>
       </div>
 
       <div className="growth">
-        <button className="growthButton">成長度合いを見に行く</button>
+        <button type="button" className="growthButton" >成長度合いを見に行く</button>
       </div>
 
     </>
