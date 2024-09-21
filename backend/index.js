@@ -1,25 +1,28 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const port = 3001; // 3000はReact.jsで使用
+const port = 3001;
 
-app.get('', (req, res) => {
-    res.send('Hello World!');
+// jsonの受け取り
+app.use(express.json());
+
+// cors対策
+app.use(cors());
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
-app.post('', (req, res) => {
-    res.send('Got a POST request');
-})
+// postの処理
+app.post("/", function (req, res) {
+    console.log(req.body);
+  try {
+    res.json(req.body); // jsonで返却
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening on port ${port}`);
 });
-
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, PATCH, DELETE, OPTION"
-    );
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    next();
-  });
