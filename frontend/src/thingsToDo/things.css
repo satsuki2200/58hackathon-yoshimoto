@@ -1,0 +1,51 @@
+.complete-area {
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
+  text-align: center;
+  vertical-align: middle;
+}
+
+.index {
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.thread {
+  display: flex;
+  justify-content: center;
+  /* text-align: center;？効かない
+  text-align: center;？効かない */
+  vertical-align: middle;
+}
+.list {
+  display: flex;
+  justify-content: center;
+  /* text-align: center;？効かない
+  text-align: center;？効かない */
+
+}
+
+.table#todo-body {
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;/*？効かない*/
+
+}
+
+.add-todo {
+  justify-content: center;
+  text-align: center;/*？効かない*/
+  text-align: center;/*？効かない*/
+  padding-bottom: 200px;
+}
+
+.growth {
+  /* vertical-align: middle; 効かなかった*/
+  text-align: center;
+}
+
+.growthButton {
+  /* padding-top: 200px; */
+  vertical-align: middle;
+  font-size: 200%;
+}
