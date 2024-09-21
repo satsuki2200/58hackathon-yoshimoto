@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import "./MainScene.css";
 
 function MainScene() {
-
   let sum = 0;
   let bestSum = 0;
   let bestMember = "";
   const goalNum = 100;
+  const [posts, setPosts] = useState([]);
 
   const db = useState([
     {
       id: 1,
       name: "　清",
-      completedNums: ["10", "40", "10", "10", "10", "10", "10"],
+      completedNums: ["10", "10", "10", "10", "10", "10", "10"],
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ function MainScene() {
     {
       id: 3,
       name: "神谷",
-      completedNums: ["10", "20", "10", "40", "50", "20", "10"],
+      completedNums: ["10", "20", "60", "10", "20", "20", "10"],
     },
     {
       id: 4,
@@ -34,19 +34,44 @@ function MainScene() {
       name: "三上",
       completedNums: ["1", "2", "1", "0", "0", "5", "0"],
     },
+    {
+      id: 6,
+      name: "堂西2",
+      completedNums: ["4", "2", "3", "4", "8", "5", "4"],
+    },
+    {
+      id: 7,
+      name: "神谷2",
+      completedNums: ["10", "20", "20", "0", "20", "20", "10"],
+    },
+    {
+      id: 8,
+      name: "外島2",
+      completedNums: ["0", "2", "3", "0", "10", "15", "0"],
+    },
+    {
+      id: 9,
+      name: "三上2",
+      completedNums: ["1", "2", "1", "0", "0", "5", "0"],
+    },
   ])[0];
 
-  const goalChecker = (sum) => {
-    if (sum >= goalNum) {
-      return (
-        <div>
-          <div>達成!</div>
-          <div>おめでとう!!</div>
-        </div>
-      );
-    }
-  };
+  /**
+   * リストを取得
+   */
+  // useEffect(() => {
+  //   fetch("https://jsonplaceholder.typicode.com/posts", { method: "GET" })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setPosts(data);
+  //     });
+  // }, []);
 
+  /**
+   * 一番スコアが高い人を探す
+   * @param {*} sum 完了したタスクの合計
+   * @param {*} name 名前
+   */
   const bestChecker = (sum, name) => {
     if (sum > bestSum) {
       bestSum = sum;
@@ -54,18 +79,29 @@ function MainScene() {
     }
   };
 
+  /**
+   * 葉っぱを作る
+   * @param {*} sum 完了したタスクの合計
+   * @returns 葉っぱの画像
+   */
   const createLeaf = (sum) => {
+    if (sum > 90) sum = 90;
     sum -= 10;
-    if (sum > 0) {
-      createLeaf(sum);
+    if (sum >= 0) {
       return (
         <div>
           <div class="leafImage"></div>
+          {createLeaf(sum)}
         </div>
       );
     }
   };
 
+  /**
+   * 花を作る
+   * @param {*} sum 完了したタスクの合計
+   * @returns 花の画像
+   */
   const createFlower = (sum) => {
     if (sum >= 100) {
       return <div class="flowerImage"></div>;
@@ -95,27 +131,19 @@ function MainScene() {
               sum = 0;
               return (
                 <div className="PersonalData">
-                  <div className="nameplate">
-                    {/* ネームプレート */}
-                    {/* 名前: {data.name} */}
+                  <div class="potImage">
+                    <div className="nameplate">{data.name}</div>
                   </div>
-                  <div class="potImage"></div>
                   <div className="stem">
                     {data.completedNums.map((num) => {
                       sum += parseInt(num);
-                      return (
-                        <div className="leaf">
-                          {createLeaf(sum)}
-                        </div>
-                      );
                     })}
+                    {createLeaf(sum)}
                   </div>
                   <div className="result">
                     <div className="bestMember">
                       {bestChecker(sum, data.name)}
-                      <div className="flower">
-                        {createFlower(sum)}
-                      </div>
+                      <div className="flower">{createFlower(sum)}</div>
                     </div>
                   </div>
                 </div>

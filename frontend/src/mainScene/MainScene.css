@@ -7,45 +7,51 @@
 
 .AllOfData{
     overflow-x: scroll;
-    max-height: 100vh;
-    min-width: 100vw;
 }
 
 .PersonalData{
-    max-width: 30%;
-    float:  left;
-    padding: 25% 30px;
-    text-align: center;
-    background-color: rgb(181, 231, 244);
+    width: 250px;
+    height: 825px;
+    background-color: rgb(116, 203, 224);
+}
+
+.nameplate{
+    width: 120px;
+    font-family:impact;
+    font-size: 40px;
+    vertical-align: super;
+    top: 0;
+    left: 0;
+    margin: 0 0px 0 -100px;
+    color: tomato;
+    background-color: silver;
 }
 
 .Infomation{
+    font-family:impact;
+    font-size: 40px;
     vertical-align: super;
-    background-color: rgb(239, 239, 173);
     position: fixed;
     top: 0;
     right: 0;
 }
-
-
 .potImage{
-    background-image:url(../image/FlowerPot.PNG);            
-    width:100px;                               
-    height:100pX;  
+    background-image:url(../image/FlowerPot.PNG);
+    width:100px;
+    height:100px;
     background-size: contain;
     background-repeat: no-repeat;
-    margin: 200px 100px 100px 100px;
-    z-index: 2000;
+    margin: 700px 100px 100px 100px;
+    position: relative;
 }
 
 .leafImage{
-    background-image:url(../image/Leaf.PNG);            
+    background-image:url(../image/Leaf.PNG);       
     width:100px;                               
-    height:100pX;  
+    height:100px;  
     background-size: contain;
     background-repeat: no-repeat;
     margin: -258.5px 100px 100px 100px;
-    z-index: 10;
 }
 
 .flowerImage{
@@ -54,7 +60,7 @@
     height:100pX;  
     background-size: contain;
     background-repeat: no-repeat;
-    margin: -450px 100px 100px 100px;
+    margin: -623px 0 0px 100px;
 }
 
 
