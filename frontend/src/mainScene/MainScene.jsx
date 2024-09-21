@@ -59,13 +59,13 @@ function MainScene() {
   /**
    * リストを取得
    */
-  // useEffect(() => {
-  //   fetch("https://jsonplaceholder.typicode.com/posts", { method: "GET" })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setPosts(data);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("http://localhost:3000/todos/completed", { method: "GET" })
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      });
+  }, []);
 
   /**
    * 一番スコアが高い人を探す
@@ -125,7 +125,7 @@ function MainScene() {
     (bestMember = ""),
     (
       <div className="App">
-        <div>
+        {/* <div>
           <div className="AllOfData">
             {db.map((data) => {
               sum = 0;
@@ -155,7 +155,13 @@ function MainScene() {
             <div className="ScoreInfo">スコア: {bestSum}</div>
             <div className="GoalInfo">目標スコア: {goalNum}</div>
           </div>
-        </div>
+        </div> */}
+        {data.map((post) => (
+          <div key={post.id}>
+            <h1>{post.title}</h1>
+            <p>{post.body}</p>
+          </div>
+        ))}
       </div>
     )
   );
