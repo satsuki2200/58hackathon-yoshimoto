@@ -1,14 +1,36 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-// express作成
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database(':memory:');
+
+'use strict';
+// DBの作成と接続
+// const { DatabaseSync } = require('node:sqlite');
+// これ揮発性たぶん
+// const db = new DatabaseSync(':memory:');
+
+
+/**
+ * express作成
+ * @description expressのインスタンスを作成
+ * @type {express}
+ */
 const app = express();
 
-// ポート番号指定
+/**
+ * ポート番号
+ * @description ポート番号を指定
+ * @type {number}
+ */
 const port = 3000;
 
-// jsonの受け取り
+/**
+ * jsonの受け取り
+ * @description jsonの受け取りを許可
+ * @type {function}
+ */
 app.use(express.json());
 
 // cors対策
@@ -26,47 +48,113 @@ const allowCrossDomain = function (req, res, next) {
 }
 app.use(allowCrossDomain);
 
-//Set up default mongoose connection
-mongoose.connect('mongodb://localhost:27017/todo-app');
+// dbが作成されているかの確認
+// console.log(db instanceof sqlite3.Database);
 
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
 
-//Get the default connection
-var db = mongoose.connection;
+// テーブルの作成
 
-//Bind connection to error event (to get notification of connection errors)
-// dbのエラー処理
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
+/**
+ * タスクのID
+ * @type {number}
+ * @description 初期値を1、都度更新
+ */
+let id = 1;
 
-// todoのスキーマを作成
-var todoSchema = new mongoose.Schema({
-    title: String,
-    date: Date,
-    isDone: Boolean
-})
+/**
+ * タスクの作成日時
+ * @type {string}
+ * @description 初期値を作成、都度更新
+ */
+let created_at = new Date().toISOString();
 
-// Compile model from schema
-var Todo = mongoose.model('Todo', todoSchema);
+/**
+ * dbの初期設定
+ * @description テーブルの作成、初期値の挿入
+ * @type {function}
+ * @param {number} id タスクのID
+ * @param {string} created_at 作成日時
+ * @param {string} update_at 更新日時
+ * @param {string} title タイトル
+ * @param {string} person_name 作成者
+ * @param {number} isDone 完了フラグ
+ * @param {string} err エラー
+ */
+db.serialize(() => {
+    db.run(
+        'CREATE TABLE todo(id NUMBER, created_at TEXT, update_at TEXT, title TEXT, person_name TEXT, isDone INTEGER);'
+    ), (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("テーブル作成完了");
+        }
+    };
+
+    db.run(
+        'INSERT INTO todo (id, created_at, update_at, title, person_name, isDone) VALUES(?, ?, ?, ?, ?, ?);',
+        [id, created_at, created_at, "初期値", "admin", 0]
+    ), (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("初期値の挿入完了");
+            id++;
+        }
+    };
+});
 
 // todoリストの中身を全取得
-app.get("/todo/list", async (req, res) => {
-    const todos = await Todo.find();
+/**
+ * todoリストの取得
+ * TODO: SQL文の修正が必要
+ * @description todoリストの中身を全取得
+ * @type {function}
+ * @param {object} req リクエスト
+ * @param {object} res レスポンス
+ */
+app.get("/todo/list", (req, res) => {
+    // const todos = await Todo.find();
+    const todos = db.exec('SELECT * FROM todo');
     console.log("todos", todos);
     console.log("getが実行されています。")
     res.json(todos);
 })
 
-// 
+/**
+ * タスクの追加
+ * TODO: 動作確認まだ
+ * @description タスクの追加
+ * @type {function}
+ * @param {object} req リクエスト
+ * @param {object} res レスポンス
+ */
 app.post('/todo/add', async (req, res) => {
-    const newTodo = new Todo({
-      text: req.body.text
-    });
-    const savedTodo = await newTodo.save();
-    res.json(savedTodo);
+    const { title, person_name } = req.body;
+    created_at = new Date().toISOString();
+    db.run(
+        'INSERT INTO todo (id, created_at, update_at, title, person_name, isDone) VALUES(?, ?, ?, ?, ?, ?);',
+        [id, created_at, created_at, title, person_name, 0]
+    ), (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("追加完了");
+            id++;
+        }
+    };
+    // res.sendStatus(201);
+    res.json({ status: 'success'});
   });
 
-
+/**
+ * タスクの削除
+ * TODO: 全部変える必要ある
+ * @description タスクの削除
+ * @type {function}
+ * @param {object} req リクエスト
+ * @param {object} res レスポンス
+ */
 app.delete('/todos/:id', async (req, res) => {
     await Todo.findByIdAndDelete(req.params.id);
     res.sendStatus(204);
