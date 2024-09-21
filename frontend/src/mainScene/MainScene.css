@@ -1,0 +1,61 @@
+.AllOfData{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: unset;
+}
+
+
+.AllOfData{
+    overflow-x: scroll;
+    max-height: 100vh;
+    min-width: 100vw;
+}
+
+.PersonalData{
+    max-width: 30%;
+    float:  left;
+    padding: 25% 30px;
+    text-align: center;
+    background-color: rgb(181, 231, 244);
+}
+
+.Infomation{
+    vertical-align: super;
+    background-color: rgb(239, 239, 173);
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+
+.potImage{
+    background-image:url(../image/FlowerPot.PNG);            
+    width:100px;                               
+    height:100pX;  
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 200px 100px 100px 100px;
+    z-index: 2000;
+}
+
+.leafImage{
+    background-image:url(../image/Leaf.PNG);            
+    width:100px;                               
+    height:100pX;  
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: -258.5px 100px 100px 100px;
+    z-index: 10;
+}
+
+.flowerImage{
+    background-image:url(../image/Flower2.PNG);            
+    width:100px;                               
+    height:100pX;  
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: -450px 100px 100px 100px;
+}
+
+
+
