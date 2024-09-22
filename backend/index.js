@@ -172,6 +172,27 @@ app.get('/todo/delete/:id', async (req, res) => {
     res.json({ status: 'success'});
   });
 
+/**
+ * タスクの完了
+ * TODO: 更新日時の変更も必要
+ * @description タスクの完了
+ * @type {function}
+ * @param {object} req リクエスト
+ * @param {object} res レスポンス
+ * @param {number} id 削除するタスクのID
+ */
+app.put('/todo/done/:id', (req, res) => {
+    db.run('UPDATE todo SET isDone = 1 WHERE id = ?', req.params.id, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("更新完了");
+            // res.sendStatus(204);
+            res.json({ status: 'success'});
+        };
+    });
+});
+
 
 // 以下、Todoとはあまり関係ないやつ
 
