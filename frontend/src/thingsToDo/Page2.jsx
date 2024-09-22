@@ -74,12 +74,12 @@ const Page2 = () => {
     setNewTodoList(switchTodoList);
   };
 
-  function buttonClick(){
-    //送信ボタンを押すとタスク一覧画面に遷移する
-    location.href = "http://localhost:5173/";
-  }
-  let button = document.getElementById('btn');
-  button.onclick = buttonClick;
+//   function buttonClick(){
+//     //送信ボタンを押すとタスク一覧画面に遷移する
+//     location.href = "http://localhost:5173/";
+//   }
+//   let button = document.getElementById('btn');
+//   button.onclick = buttonClick;
 
   return (
     <>
