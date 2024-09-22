@@ -174,24 +174,51 @@ app.delete('/todo/delete/:id', async (req, res) => {
 
 /**
  * タスクの完了
- * TODO: 更新日時の変更も必要
  * @description タスクの完了
  * @type {function}
  * @param {object} req リクエスト
  * @param {object} res レスポンス
  * @param {number} id 削除するタスクのID
+ * @param {string} update_at 更新日時
  */
 app.put('/todo/done/:id', (req, res) => {
-    db.run('UPDATE todo SET isDone = 1 WHERE id = ?', req.params.id, (err) => {
+    const update_at = new Date().toISOString();
+    db.run('BEGIN TRANSACTION');
+    db.run('UPDATE todo SET update_at = ?, isDone = ? WHERE id = ?', [update_at, 1, req.params.id], (err) => {
         if (err) {
             console.log(err);
         } else {
             console.log("更新完了");
+            db.run('COMMIT');
             // res.sendStatus(204);
             res.json({ status: 'success'});
         };
     });
 });
+
+/**
+ * タスクの未完了
+ * @description タスクの未完了
+ * @type {function}
+ * @param {object} req リクエスト
+ * @param {object} res レスポンス
+ * @param {number} id 未完了にするタスクのID
+ * @param {string} update_at 更新日時
+ */
+app.put('/todo/undone/:id', (req, res) => {
+    const update_at = new Date().toISOString();
+    db.run('BEGIN TRANSACTION');
+    db.run('UPDATE todo SET update_at = ?, isDone = ? WHERE id = ?', [update_at, 0, req.params.id], (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("更新完了");
+            db.run('COMMIT');
+            // res.sendStatus(204);
+            res.json({ status: 'success'});
+        };
+    });
+})
 
 /**
  * 完了したタスク数を取得
