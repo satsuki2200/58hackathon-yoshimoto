@@ -1,14 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./things.css";
 // import axios from "axios";
 // window.location.href = 'page1';
 
 const Things = () => {
+  const navigate = useNavigate();
+  const handleForm = () => {
+    navigate("/page2.html");
+  };
+  const handleView = () => {
+    navigate("/mainScene");
+  };
   // todoリスト
   // const [todoText, setTodoText] = useState("");
   const [todoList, setNewTodoList] = React.useState([]);
   const [filteredTodoList, setFilteredTodoList] = React.useState([]);
-  const [radio, setRadio] = React.useState('all');
+  const [radio, setRadio] = React.useState("all");
 
   // ラジオボタン更新
   // const handleChange = (event) => {
@@ -19,7 +27,7 @@ const Things = () => {
   //   } else if (event.target.value === "complete") {
   //     const completeTodoList = [...todoList].filter((todo) => todo.status === "完了");
   //     setFilteredTodoList(completeTodoList);
-  //   } 
+  //   }
   //   return
   // }
 
@@ -27,10 +35,10 @@ const Things = () => {
   // const onChangeTodoText = (event) => {
   //   setTodoText(event.target.value);
   // };
-  
+
   // 追加ボタンを押すとタスクがToDoリストに追加される
   // const onClickAdd = () => {
-  //   if (todoText === "") 
+  //   if (todoText === "")
   //     return;
   //   const newTodo = {
   //     comment: todoText,
@@ -72,7 +80,6 @@ const Things = () => {
 
   return (
     <>
-  
       <div className="complete-area">
         {/* <label>
           <input type="radio" value="all" onChange={handleChange} checked={radio === 'all'} />
@@ -98,47 +105,50 @@ const Things = () => {
               <td>タスク名</td> */}
               {/* <td>状態</td> */}
             </tr>
-            </thead>
-            <thred className="list">
-
-            {
-              radio === "all"?
-              <tbody id="todo-body">  
-              {todoList.map((todo, index) => (
-                <tr key={index}>
-                  <td>{index}</td>
-                  <td>{todo.comment}</td>
-                  <td>
+          </thead>
+          <thred className="list">
+            {radio === "all" ? (
+              <tbody id="todo-body">
+                {todoList.map((todo, index) => (
+                  <tr key={index}>
+                    <td>{index}</td>
+                    <td>{todo.comment}</td>
+                    <td>
                       <button onClick={() => onClickSwitch(index)}>
-                    {todo.status}
+                        {todo.status}
                       </button>
-                  </td>
-                  <td>
-                    <button onClick={() => onClickDelete(index)}>削除</button>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td>
+                      <button onClick={() => onClickDelete(index)}>削除</button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
-              :
-              <tbody id="todo-body">  
-              {filteredTodoList.map((todo, index) => (
-                <tr key={index}>
-                  <td>{index}</td>
-                  <td>{todo.comment}</td>
-                  <td><button onClick={() => onClickSwitch(index)}>{todo.status}</button></td>
-                  <td><button onClick={() => onClickDelete(index)}>削除</button></td>
-                </tr>
-              ))}
+            ) : (
+              <tbody id="todo-body">
+                {filteredTodoList.map((todo, index) => (
+                  <tr key={index}>
+                    <td>{index}</td>
+                    <td>{todo.comment}</td>
+                    <td>
+                      <button onClick={() => onClickSwitch(index)}>
+                        {todo.status}
+                      </button>
+                    </td>
+                    <td>
+                      <button onClick={() => onClickDelete(index)}>削除</button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
-            }        
-            </thred>
-            {/* ここ */}
-
+            )}
+          </thred>
+          {/* ここ */}
         </table>
       </div>
 
       <div className="add-todo">
-        <button type="button" className="newTask">
+        <button type="button" className="newTask" onClick={handleForm}>
           新規タスクの追加
         </button>
         {/* <input value={todoText} onChange={onChangeTodoText} />
@@ -146,12 +156,12 @@ const Things = () => {
       </div>
 
       <div className="growth">
-        <button type="button" className="growthButton" >成長度合いを見に行く</button>
+        <button type="button" className="growthButton" onClick={handleView}>
+          成長度合いを見に行く
+        </button>
       </div>
-
     </>
-
   );
-}
+};
 
 export default Things;

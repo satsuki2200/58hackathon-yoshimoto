@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./things";
 import "./things.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const Page2 = () => {
@@ -11,7 +12,7 @@ const Page2 = () => {
   const [filteredTodoList, setFilteredTodoList] = React.useState([]);
   const [radio, setRadio] = React.useState('all');
 
-    window.location.href = 'page2.html';
+    // window.location.href = 'page2.html';
   // ラジオボタン更新
 //   const handleChange = (event) => {
 //     setRadio(event.target.value);
@@ -113,7 +114,7 @@ const Page2 = () => {
                   <td>{index}</td>
                   <td>{todo.comment}</td>
                   <td>
-                      <button onClick={() => onClickSwitch(index)}>
+                      <button>
                     {todo.status}
                       </button>
                   </td>
