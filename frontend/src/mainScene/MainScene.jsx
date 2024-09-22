@@ -6,7 +6,6 @@ function MainScene() {
   let bestSum = 0;
   let bestMember = "";
   const goalNum = 100;
-  const [posts, setPosts] = useState([]);
 
   const db = useState([
     {
@@ -56,22 +55,6 @@ function MainScene() {
     },
   ])[0];
 
-  /**
-   * リストを取得
-   */
-  useEffect(() => {
-    fetch("http://localhost:3000/todos/completed", { method: "GET" })
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      });
-  }, []);
-
-  /**
-   * 一番スコアが高い人を探す
-   * @param {*} sum 完了したタスクの合計
-   * @param {*} name 名前
-   */
   const bestChecker = (sum, name) => {
     if (sum > bestSum) {
       bestSum = sum;
@@ -79,67 +62,66 @@ function MainScene() {
     }
   };
 
-  /**
-   * 葉っぱを作る
-   * @param {*} sum 完了したタスクの合計
-   * @returns 葉っぱの画像
-   */
   const createLeaf = (sum) => {
     if (sum > 90) sum = 90;
     sum -= 10;
     if (sum >= 0) {
       return (
         <div>
-          <div class="leafImage"></div>
+          <div className="leafImage"></div>
           {createLeaf(sum)}
         </div>
       );
     }
   };
 
-  /**
-   * 花を作る
-   * @param {*} sum 完了したタスクの合計
-   * @returns 花の画像
-   */
   const createFlower = (sum) => {
     if (sum >= 100) {
-      return <div class="flowerImage"></div>;
+      return <div className="flowerImage"></div>;
     }
   };
 
   /**
-<必要な要素>(上から優先順位)
-ネームプレート:クリア!!
-植木鉢:クリア!!
-葉っぱ:クリア!!
-花:クリア!!
-各々のスコア(茎の上、花の上に表示):クリア!!
-目標スコア:クリア!!
-一位の人の名前:クリア!!
-一位の人のスコア:クリア!!
-締切日(残り日数)
-*/
+    <必要な要素>(上から優先順位)
+    ネームプレート:クリア!!
+    植木鉢:クリア!!
+    葉っぱ:クリア!!
+    花:クリア!!
+    各々のスコア(茎の上、花の上に表示):クリア!!
+    目標スコア:クリア!!
+    一位の人の名前:クリア!!
+    一位の人のスコア:クリア!!
+    締切日(残り日数)
+    **/
   return (
     (bestSum = 0),
     (bestMember = ""),
     (
       <div className="App">
-        {/* <div>
+        <button className="button"> </button>
+
+        <div>
           <div className="AllOfData">
             {db.map((data) => {
               sum = 0;
               return (
                 <div className="PersonalData">
-                  <div class="potImage">
+                  <div className="nameplate">
+                    {/* ネームプレート */}
+                    {/* 名前: {data.name} */}
+                  </div>
+
+                  <div className="potImage">
                     <div className="nameplate">{data.name}</div>
                   </div>
+
                   <div className="stem">
                     {data.completedNums.map((num) => {
                       sum += parseInt(num);
                     })}
                     {createLeaf(sum)}
                   </div>
+
                   <div className="result">
                     <div className="bestMember">
                       {bestChecker(sum, data.name)}
@@ -155,13 +137,7 @@ function MainScene() {
             <div className="ScoreInfo">スコア: {bestSum}</div>
             <div className="GoalInfo">目標スコア: {goalNum}</div>
           </div>
-        </div> */}
-        {data.map((post) => (
-          <div key={post.id}>
-            <h1>{post.title}</h1>
-            <p>{post.body}</p>
-          </div>
-        ))}
+        </div>
       </div>
     )
   );

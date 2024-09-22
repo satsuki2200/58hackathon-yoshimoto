@@ -63,5 +63,20 @@
     margin: -623px 0 0px 100px;
 }
 
+.button{
+    background-image:url(../image/Sun.png);
+    width:300px;
+    height:300pX;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: -100px -80px px 70px;
 
+
+
+    width: 100px;
+    height: 100px;
+    font-family: misaki;
+    font-size: large;
+
+}
 
