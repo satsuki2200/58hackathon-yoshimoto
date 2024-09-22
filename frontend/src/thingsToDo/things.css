@@ -1,0 +1,108 @@
+html,body {
+  background-color: burlywood;
+}
+
+.todoList {
+  font-size: 50px;
+}
+
+.complete-area {
+  padding-top: 50px;
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
+  text-align: center;
+}
+
+.index {
+  display: flex;
+  
+  justify-content: center;
+  /* vertical-align: middle; 効かなかった*/
+}
+
+.thread {
+  display: flex;
+  justify-content: center;
+  /* text-align: center;？効かない
+  text-align: center;？効かない */
+  vertical-align: middle;
+}
+.list {
+  /* display: flex; */
+  justify-content: center;
+  
+  /* text-align: center;？効かない
+  text-align: center;？効かない */
+
+}
+
+.table#todo-body {
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;/*？効かない*/
+
+}
+
+.add-todo {
+  justify-content: center;
+  text-align: center;/*？効かない*/
+  text-align: center;/*？効かない*/
+  padding-bottom: 200px;
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
+}
+
+.addButton {
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
+}
+
+.growth {
+  /* vertical-align: middle; 効かなかった*/
+  text-align: center;
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
+  /* width: 200px; */
+}
+
+.button {
+  /* padding-top: 200px; */
+  /* font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;   */
+  vertical-align: middle;
+  
+}
+
+.growthButton {
+  /* ボタンと文字のの大きさ */
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
+  font-size: 160%;
+  color: white;
+  width: 300px;
+  height: 80px;
+  border-radius: 20px;
+  background-color: #339933;
+  border-color: #339933;
+}
+
+.growthButton:hover {
+  background-color: #003300;
+}
+
+.newTask {
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
+  border-radius: 10px;
+  font-size: 20px;
+  padding-top: 0%;
+  width: 210px;
+  height: 50px;
+}
+
+.newTask:hover {
+  background-color: #99CC99;
+}
+
+.tasks {
+  width: 500px;
+  height: 40px;
+}
+
+.name{
+  width: 500px;
+  height: 40px;
+}
