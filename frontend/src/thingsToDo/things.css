@@ -2,6 +2,10 @@ html,body {
   background-color: burlywood;
 }
 
+.todoList {
+  font-size: 50px;
+}
+
 .complete-area {
   padding-top: 50px;
   font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
@@ -72,6 +76,33 @@ html,body {
   width: 300px;
   height: 80px;
   border-radius: 20px;
-  background-color: darkgreen;
-  border-color: darkgreen;
+  background-color: #339933;
+  border-color: #339933;
+}
+
+.growthButton:hover {
+  background-color: #003300;
+}
+
+.newTask {
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN',sans-serif;  
+  border-radius: 10px;
+  font-size: 20px;
+  padding-top: 0%;
+  width: 210px;
+  height: 50px;
+}
+
+.newTask:hover {
+  background-color: #99CC99;
+}
+
+.tasks {
+  width: 500px;
+  height: 40px;
+}
+
+.name{
+  width: 500px;
+  height: 40px;
 }
