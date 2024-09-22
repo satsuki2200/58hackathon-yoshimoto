@@ -2,6 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import "./MainScene.css";
+import { useNavigate } from "react-router-dom";
 
 function MainScene() {
   let sum = 0;
@@ -82,6 +83,11 @@ function MainScene() {
       return <div className="flowerImage"></div>;
     }
   };
+  const navigate = useNavigate();
+  const handleHome = () => {
+    navigate("/");
+  };
+
 
   /**
     <必要な要素>(上から優先順位)
@@ -100,7 +106,7 @@ function MainScene() {
     (bestMember = ""),
     (
       <div className="App">
-        <button className="button"> </button>
+        <button className="button" onClick={handleHome}> </button>
 
         <div>
           <div className="AllOfData">
