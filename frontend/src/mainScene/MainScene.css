@@ -1,0 +1,82 @@
+.AllOfData{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: unset;
+}
+
+
+.AllOfData{
+    overflow-x: scroll;
+}
+
+.PersonalData{
+    width: 250px;
+    height: 825px;
+    /* background-color: rgb(116, 203, 224); */
+}
+
+.nameplate{
+    width: 120px;
+    font-family:impact;
+    font-size: 40px;
+    vertical-align: super;
+    top: 0;
+    left: 0;
+    margin: 0 0px 0 -100px;
+    color: tomato;
+    background-color: silver;
+}
+
+.Infomation{
+    font-family:impact;
+    font-size: 40px;
+    vertical-align: super;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+.potImage{
+    background-image:url(../image/FlowerPot.PNG);
+    width:100px;
+    height:100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 700px 100px 100px 100px;
+    position: relative;
+}
+
+.leafImage{
+    background-image:url(../image/Leaf.PNG);       
+    width:100px;                               
+    height:100px;  
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: -258.5px 100px 100px 100px;
+}
+
+.flowerImage{
+    background-image:url(../image/Flower2.PNG);            
+    width:100px;                               
+    height:100pX;  
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: -623px 0 0px 100px;
+}
+
+.button{
+    background-image:url(../image/Sun.png);
+    width:300px;
+    height:300pX;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: -100px -80px px 70px;
+
+
+
+    width: 100px;
+    height: 100px;
+    font-family: misaki;
+    font-size: large;
+
+}
+
