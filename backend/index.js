@@ -160,7 +160,7 @@ app.post('/todo/add', async (req, res) => {
  * @param {object} req リクエスト
  * @param {object} res レスポンス
  */
-app.get('/todo/delete/:id', async (req, res) => {
+app.delete('/todo/delete/:id', async (req, res) => {
     db.run('DELETE FROM todo WHERE id = ?', req.params.id, (err) => {
         if (err) {
             console.log(err);
@@ -193,6 +193,24 @@ app.put('/todo/done/:id', (req, res) => {
     });
 });
 
+/**
+ * 完了したタスク数を取得
+ * @description 完了したタスク数を取得
+ * @type {function}
+ * @param {object} req リクエスト
+ * @param {object} res レスポンス
+ * @param {number} sum 完了したタスク数
+ */
+app.get('/todo/completed/sum', (req, res) => {
+    db.get('SELECT COUNT(*) as count FROM todo WHERE isDone = 1', [], (err, sum) => {
+        if (err) {
+            console.error(err.message);
+        } else {
+            console.log("完了タスク数", sum);
+            res.json({ completed_sum : sum });
+        }
+    })
+})
 
 // 以下、Todoとはあまり関係ないやつ
 
