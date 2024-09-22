@@ -3,7 +3,13 @@ const cors = require("cors");
 // const mongoose = require("mongoose");
 
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database(':memory:');
+const db = new sqlite3.Database('./todo.db', (err) => {
+    if (err) {
+        console.error(err.message);
+    } else {
+        console.log('データベース接続成功');
+    }
+});
 
 'use strict';
 // DBの作成と接続
@@ -57,9 +63,9 @@ app.use(allowCrossDomain);
 /**
  * タスクのID
  * @type {number}
- * @description 初期値を1、都度更新
+ * @description 2から都度更新。1は初期値で使用。
  */
-let id = 1;
+let id = 2;
 
 /**
  * タスクの作成日時
@@ -82,7 +88,7 @@ let created_at = new Date().toISOString();
  */
 db.serialize(() => {
     db.run(
-        'CREATE TABLE todo(id NUMBER, created_at TEXT, update_at TEXT, title TEXT, person_name TEXT, isDone INTEGER);'
+        'CREATE TABLE IF NOT EXISTS todo(id NUMBER, created_at TEXT, update_at TEXT, title TEXT, person_name TEXT, isDone INTEGER);'
     ), (err) => {
         if (err) {
             console.log(err);
@@ -91,23 +97,21 @@ db.serialize(() => {
         }
     };
 
-    db.run(
-        'INSERT INTO todo (id, created_at, update_at, title, person_name, isDone) VALUES(?, ?, ?, ?, ?, ?);',
-        [id, created_at, created_at, "初期値", "admin", 0]
-    ), (err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("初期値の挿入完了");
-            id++;
-        }
-    };
+    // // テーブル作成時はコメント外して初期値挿入
+    // db.run(
+    //     'INSERT INTO todo (id, created_at, update_at, title, person_name, isDone) VALUES(?, ?, ?, ?, ?, ?);',
+    //     [1, created_at, created_at, "初期値", "admin", 0]
+    // ), (err) => {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         console.log("初期値の挿入完了");
+    //     }
+    // };
 });
 
-// todoリストの中身を全取得
 /**
  * todoリストの取得
- * TODO: SQL文の修正が必要
  * @description todoリストの中身を全取得
  * @type {function}
  * @param {object} req リクエスト
@@ -115,15 +119,19 @@ db.serialize(() => {
  */
 app.get("/todo/list", (req, res) => {
     // const todos = await Todo.find();
-    const todos = db.exec('SELECT * FROM todo');
-    console.log("todos", todos);
-    console.log("getが実行されています。")
-    res.json(todos);
-})
+    // const todos = db.all('SELECT * FROM todo');
+    db.all('SELECT * FROM todo', (err, todos) => {
+        if (err) {
+            console.error(err.message);
+        }
+        console.log("todos", todos);
+        console.log("getが実行されています。")
+        res.json(todos); 
+    });
+});
 
 /**
  * タスクの追加
- * TODO: 動作確認まだ
  * @description タスクの追加
  * @type {function}
  * @param {object} req リクエスト
@@ -138,26 +146,30 @@ app.post('/todo/add', async (req, res) => {
     ), (err) => {
         if (err) {
             console.log(err);
-        } else {
-            console.log("追加完了");
-            id++;
         }
     };
+    id++;
     // res.sendStatus(201);
     res.json({ status: 'success'});
   });
 
 /**
  * タスクの削除
- * TODO: 全部変える必要ある
  * @description タスクの削除
  * @type {function}
  * @param {object} req リクエスト
  * @param {object} res レスポンス
  */
-app.delete('/todos/:id', async (req, res) => {
-    await Todo.findByIdAndDelete(req.params.id);
-    res.sendStatus(204);
+app.get('/todo/delete/:id', async (req, res) => {
+    db.run('DELETE FROM todo WHERE id = ?', req.params.id, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("削除完了");
+        }
+    })
+    // res.sendStatus(204);
+    res.json({ status: 'success'});
   });
 
 
